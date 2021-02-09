@@ -1,0 +1,419 @@
+@mixin font($font_name, $file_name, $weight, $style)
+   @font-face
+      font-family: $font_name
+      font-display: swap
+      src: url("../fonts/#{$file_name}.woff") format("woff"), url("../fonts/#{$file_name}.woff2") format("woff2")
+      font-weight: #{$weight}
+      font-style: #{$style}
+
+@import "fonts"
+
+//Минимальный и максимальный размер контейнера
+@mixin container($maxSizeContainer, $minSizeContainer)
+   @media (min-width: 1920px)
+      max-width: #{$maxSizeContainer + px}
+   width: calc(#{$minSizeContainer + px} + #{$maxSizeContainer - $minSizeContainer} * ((100vw - 768px) / (1920 - 768)))
+
+
+$maxWidth: 1920
+$maxWidthContainer: 1480
+@mixin res($property, $startSize, $minSize, $type)
+   $addSize: $startSize - $minSize
+   @if $type == 1 //Меньше контейнера
+      #{$property}: #{$startSize + px}
+      @media (max-width: #{$maxWidthContainer + px})
+         #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 768px) / #{$maxWidthContainer - 768}))
+   @else if $type == 2 //Больше контейнера
+      #{$property}: #{$startSize + px}
+      @media (min-width: #{$maxWidthContainer} + px)
+         #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 768px) / #{$maxWidth - 768}))
+   @else
+      #{$property}: calc(#{$minSize + px} + #{$addSize} * ((100vw - 768px) / #{$maxWidth - 768}))
+
+
+
+$yellow: #FFBC0D
+$black: #000000
+$white: #FFFFFF
+
+*
+   outline: none
+   padding: 0
+   margin: 0
+
+*:hover, *:focus
+   transition: 0.5s
+
+li
+   list-style-type: none
+
+body
+   font-family: "Speedee Regular", serif
+   margin: 0
+
+h1
+   font-family: "Speedee Bold", serif
+   @include res("font-size", 178, 82, 1)
+   line-height: 100%
+   text-transform: uppercase
+
+h2
+   font-size: 60px
+
+p
+   font-size: 48px
+   font-weight: normal
+
+.container
+   @include container(1480, 680)
+   margin-right: auto
+   margin-left: auto
+
+.center
+   display: flex
+   justify-content: center
+   align-items: center
+   position: relative
+.header
+   .header__body
+      justify-content: space-between
+      @include res("height", 300, 165, 1)
+   &__logo
+      @include res("width", 200, 100, 1)
+      @include res("margin-left", -90, 0, 1)
+      overflow: hidden
+      img
+         max-width: 100%
+         display: block
+
+   &__nav
+      ul
+         display: flex
+         position: relative
+         z-index: 2
+      li
+         margin: 0 0 0 15px
+         a
+            position: relative
+            display: flex
+         a::before
+            content: url('../img/link-decor.svg')
+            height: 50px
+            display: flex
+            align-items: center
+            padding: 0 10px 0 0
+@media (max-width: 768px)
+   .header
+      .center
+         justify-content: center
+
+//Главный <--
+.hero
+   margin-bottom: 200px
+   &__container
+      position: relative
+      &::before
+         content: url('../img/qrpatern.svg')
+         position: absolute
+         left: 50%
+         transform: translate(-50%, -50%)
+         bottom: -250px
+      &::after
+         content: url('../img/phone-p.png')
+         position: absolute
+         right: -212px
+         bottom: -220px
+         zoom: 1
+   &__title
+      background: $yellow
+      position: relative
+      @include res("padding-top", 70, 35, 1)
+      @include res("padding-bottom", 70, 35, 1)
+      &::before
+         content: url('../img/square.svg')
+         position: absolute
+         left: 0
+         bottom: -200px
+   &__text
+      @include res("font-size", 48, 28, 1)
+      background: $yellow
+      padding: 40px
+      @include res("margin-left", 200, 100, 1)
+      @include res("margin-right", 200, 100, 1)
+      position: relative
+      &::before, &::after
+         content: url('../img/square.svg')
+         position: absolute
+         height: 200px
+      &::before
+         left: -200px
+         bottom: -200px
+      &::after
+         right: -200px
+         bottom: -200px
+
+@media (max-width: 768px)
+   .hero
+      &__container
+         &::after
+            zoom: 0.6
+            right: -270px
+         &::before
+            bottom: -270px
+            zoom: 0.4
+
+      &__title
+         &::before
+            zoom: 0.5
+            bottom: -250px
+      &__text
+         &::before, &::after
+            zoom: 0.5
+//Главный -->
+
+
+//В MCD / ТикТок <--
+.to-app, .to-tiktok
+   flex-direction: column
+   &__btn
+      display: block
+      position: relative
+      &:hover
+         picture:last-child
+            opacity: 1
+   img, picture
+      width: 100%
+      height: 100%
+      left: 0
+      top: 0
+   picture
+      position: absolute
+      left: 0
+      top: 0
+      &:last-child
+         opacity: 0
+   &__title
+      @include res("font-size", 62, 34, 1)
+      text-align: center
+//В MCD / ТикТок -->
+
+
+//В MCD <--
+.to-app
+   background: $yellow
+   @include res("padding-top", 90, 45, 1)
+   @include res("padding-bottom", 90, 45, 1)
+   z-index: 1
+   &::after
+      content: url('../img/arrow.svg')
+      position: absolute
+      bottom: -95px
+      right: 60px
+   &__title
+      @include res("margin-bottom", 60, 30, 1)
+   &__btn
+      width: 180px
+      height: 180px
+
+@media (max-width: 768px)
+   .to-app
+      &::after
+         left: 50%
+         transform: translate(-50%, -50%)
+         bottom: -315px
+         right: auto
+         zoom: 0.65
+//В MCD -->
+
+
+//В ТикТок <--
+.to-tiktok
+   background: $white
+   @include res("padding-top", 400, 250, 1)
+   z-index: 0
+   &__title
+      @include res("margin-top", 180, 90, 1)
+      z-index: 2
+   &__btn
+      width: 240px
+      height: 240px
+      &::after
+         content: url('../img/qr-pattern.png')
+         position: absolute
+         top: 50%
+         left: 50%
+         transform: translate(-50%, -50%)
+         z-index: 0
+@media (max-width: 768px)
+   .to-tiktok
+      &__btn
+         &::after
+            zoom: 0.5
+//В ТикТок -->
+
+
+//Слайдер ваучеров <--
+.vouchers-slider
+   //display: none
+   background: $white
+   height: 500px  
+   margin-top: 100px
+   @include res("padding-top", 120, 60, 1)
+   @include res("padding-bottom", 480, 240, 1)
+//Слайдер ваучеров -->
+
+
+//Сладйдер ТикТок <--
+.tiktok-slider
+   background: $yellow
+   @include res("height", 625, 870, 1)
+   font-size: 30px
+   position: relative
+   margin-top: 200px
+   img
+      width: 90%
+      position: absolute
+      top: 50%
+      left: 50%
+      transform: translate(-50%, -50%)
+      bottom: -250px
+      z-index: 1
+//Слайдер ТикТок -->
+
+
+//Подвал <--
+.footer
+   background: #CCC
+   &__top
+      background: $white
+      padding-bottom: 70px
+      @include res("padding-top", 215, 150, 1)
+      img
+         height: 60px
+         margin: 0 20px
+   &__bottom
+      color: $white
+      background: $yellow
+      justify-content: flex-end
+      height: 200px
+   &__icon
+      height: 65px
+      overflow: hidden
+      img
+         max-height: 100%
+         display: block
+   &__text
+      @include res("font-size", 40, 30, 1)
+      margin: 0 250px 0 65px
+
+@media (max-width: 768px)
+   .footer
+      &__bottom
+         justify-content: center
+      &__text
+         margin: 0 0 0 65px
+
+@media (max-width: 576px)
+   .footer
+      &__top, &__bottom
+         flex-direction: column
+      &__text
+         margin: 20px 0 0 0
+//Подвал -->
+
+
+
+
+
+.slider 
+   overflow: hidden
+
+.slider .slides-wrapper 
+   display: flex
+   overflow: hidden
+
+
+.slider .slides-wrapper.reload 
+   animation-name: slider-in
+   animation-duration: .4s
+
+
+.slider .slide
+   width: 30%
+   margin: 0 5px
+   display: block
+
+
+.slider .slide img 
+   width: 100%
+
+.slider-top 
+   display: flex
+   justify-content: center
+   width: 80%
+   margin: 0 auto
+
+.slider-top .slider-phone 
+   height: 60vh
+   position: relative
+
+
+.slider-top .slider-phone .slider-phone-bg 
+   max-height: 100%
+
+
+.slider-top .slider-phone .selected-slider-item 
+   position: absolute
+   width: 100%
+   top: 32%
+
+
+.slider-top .slider-phone .selected-slider-item picture 
+   display: block
+   animation-name: fade-in
+   animation-duration: .4s
+
+
+.slider-top .slider-phone .selected-slider-item img 
+   width: 75%
+   margin: 0 auto
+   display: block
+
+
+.slider .slides 
+   display: none
+
+
+.slider .slider-info 
+   width: 50%
+   margin: auto 0
+   position: relative
+
+
+.slider .slider-info .slider-info-text 
+   position: absolute
+   color: #fff
+   top: 25%
+   width: 80%
+   left: 10%
+   font-size: 16px
+   line-height: 1.6rem
+
+
+.slider .slider-info img 
+   max-width: 100%
+
+
+@keyframes slider-in 
+   0%
+      transform: translateX(20%)
+   100%
+      transform: translateX(0)
+
+@keyframes fade-in 
+   0%
+      transform: translateY(10%)
+      opacity: 0
+   100%
+      transform: translateY(0)
+      opacity: 1
