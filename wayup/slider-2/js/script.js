@@ -14,8 +14,8 @@ var multiItemSlider = (function () {
       _step = _itemWidth / _wrapperWidth * 100, // величина шага (для трансформации)
       _items = []; // массив элементов
 
-      _mouseDown = false;
-      _mouseDownX = 0;
+      _touchDown = false;
+      _touchDownX = 0;
 
     // наполнение массива _items
     _sliderItems.forEach(function (item, index) {
@@ -99,17 +99,31 @@ var multiItemSlider = (function () {
     }
 
     _mainElement.addEventListener( 'mousedown', function(e) {
-      _mouseDown = true;
-      _mouseDownX = e.clientX;
+      _touchDown = true;
+      _touchDownX = e.clientX;
     });
 
     _mainElement.addEventListener( 'mouseup', function(e) {
-      if ( e.clientX < _mouseDownX ) _transformItem('right');
-      else if ( e.clientX > _mouseDownX ) _transformItem('left');
+      if ( e.clientX < _touchDownX ) _transformItem('right');
+      else if ( e.clientX > _touchDownX ) _transformItem('left');
     });
 
     document.addEventListener( 'mouseup', function() {
-      _mouseDown = false;
+      _touchDown = false;
+    });
+
+    _mainElement.addEventListener( 'touchstart', function(e) {
+      _touchDown = true;
+      _touchDownX = e.clientX;
+    });
+
+    _mainElement.addEventListener( 'touchend', function(e) {
+      if ( e.clientX < _touchDownX ) _transformItem('right');
+      else if ( e.clientX > _touchDownX ) _transformItem('left');
+    });
+
+    document.addEventListener( 'touchend', function() {
+      _touchDown = false;
     });
 
     // инициализация
@@ -132,6 +146,9 @@ let images = document.querySelectorAll('img');
 
 for ( let i = 0; i < images.length; i++ ) {
   images[i].onmousedown = function() {
+    return false;
+  }
+  images[i].ontouchstart = function() {
     return false;
   }
 }
