@@ -197,7 +197,7 @@ h3 {
 }
 
 .container {
-  width: calc(290px + 880 * ((100vw - 320px) / (1920 - 320)));
+  width: 1170px;
   margin: 0 auto;
 }
 
