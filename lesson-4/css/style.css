@@ -1,0 +1,285 @@
+@charset "UTF-8";
+
+/* Подключение шрифтов */
+
+@font-face {
+  font-family: "Montserrat Black";
+  font-display: swap;
+  src: url("../fonts/Montserrat Black.woff") format("woff"), url("../fonts/Montserrat Black.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "OpenSans Regular";
+  font-display: swap;
+  src: url("../fonts/OpenSans Regular.woff") format("woff"), url("../fonts/OpenSans Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Ubuntu Bold";
+  font-display: swap;
+  src: url("../fonts/Ubuntu Bold.woff") format("woff"), url("../fonts/Ubuntu Bold.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Ubuntu Regular";
+  font-display: swap;
+  src: url("../fonts/Ubuntu Regular.woff") format("woff"), url("../fonts/Ubuntu Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Размер свойства(свойство, размер макета №1, размер макета №2, размер свойства №1, размер свойства №2) */
+
+/* Ширина контейнра(максимальный размер макета, минимальный размер макета, максимальный размер контейнера, минимальный размер контейнера) */
+
+/* Обнуление стилей */
+
+*,
+*::before,
+*::after {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  outline: 0;
+}
+
+*:hover,
+*:focus {
+  -webkit-transition: .5s;
+  -o-transition: .5s;
+  transition: .5s;
+}
+
+a {
+  text-decoration: none;
+}
+
+body,
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+input,
+button {
+  font: inherit;
+}
+
+body {
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+}
+
+.center {
+  text-align: center;
+  margin: 0 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-item-align: center;
+  align-self: center;
+}
+
+/* Стили */
+
+body {
+  color: #201B2D;
+  font-family: "Ubuntu Regular", serif;
+  font-size: 15px;
+  line-height: 150%;
+}
+
+button,
+input[type=submit] {
+  font-family: "Montserrat Black", serif;
+  color: #2E2A1B;
+  background: #FFD429;
+  height: 56px;
+  border: none;
+}
+
+button:hover,
+input[type=submit]:hover {
+  background: #FFCF10;
+  cursor: pointer;
+}
+
+input {
+  margin-bottom: 15px;
+  padding: 0 24px;
+  height: 48px;
+  border: 1px solid #BBBBBB;
+  border-radius: 0;
+}
+
+input:focus {
+  border: 1px solid #FFCF10;
+}
+
+input::-webkit-input-placeholder {
+  color: #BBBBBB;
+}
+
+input:focus::-webkit-input-placeholder {
+  color: transparent;
+  -webkit-transition: .5s;
+  transition: .5s;
+}
+
+h1,
+h2,
+h3 {
+  font-family: "Ubuntu Bold", serif;
+  line-height: 125%;
+}
+
+h1 {
+  font-size: 36px;
+}
+
+h1 span {
+  font-size: 60px;
+}
+
+h2 {
+  font-size: 30px;
+}
+
+h3 {
+  font-size: 18px;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.container {
+  width: calc(290px + 880 * ((100vw - 320px) / (1920 - 320)));
+  margin: 0 auto;
+}
+
+.header {
+  background: #4ebefe;
+  background: -o-linear-gradient(329deg, #4ebefe 0%, #378fd9 100%);
+  background: linear-gradient(121deg, #4ebefe 0%, #378fd9 100%);
+  color: #FFFFFF;
+  padding: 80px 0;
+}
+
+.header__wrap {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.header__title {
+  max-width: 560px;
+}
+
+.header__text {
+  font-size: 16px;
+  max-width: 400px;
+  margin: 30px 0;
+}
+
+.header__cta {
+  padding: 0 28px;
+}
+
+.header__logo img {
+  height: 40px;
+  width: auto;
+}
+
+.ahead,
+.form {
+  padding: 120px 0;
+}
+
+.ahead {
+  background: #FFFFFF;
+}
+
+.ahead__list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+.ahead__item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  text-align: center;
+  max-width: 300px;
+}
+
+.ahead__item img {
+  height: 60px;
+  width: auto;
+}
+
+.ahead__item h3 {
+  margin: 30px 0 15px 0;
+}
+
+.form {
+  background: #ECF3F8;
+}
+
+.form__box {
+  width: 340px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+.form__box input {
+  width: 100%;
+}
+
+footer {
+  color: #FFFFFF;
+  background: #164D7A;
+  font-size: 14;
+  font-family: "Open Sans", serif;
+  width: 100%;
+  padding: 60px 0;
+}
+
+@media (min-width: 1920px) {
+  .container {
+    max-width: 1170px;
+  }
+}
